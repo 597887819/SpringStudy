@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+       <!-- 开启注解功能 -->
+       <context:annotation-config/>
+
+       <!--
+       <bean id="helloWorld" class="com.tutorialspoint.HelloWorld">
+              <property name="message" value="Hello World!"/>
+       </bean>
+       -->
+
+
+       <!-- bean 作用域 -->
+       <!--
+       <bean id="helloWorldSingleton" class="com.tutorialspoint.HelloWorld" scope="singleton">
+       </bean>
+
+       <bean id="helloWorldPrototype" class="com.tutorialspoint.HelloWorld" scope="prototype">
+       </bean>
+       -->
+
+
+       <!--===============bean 生命周期 begin ==============-->
+       <!--
+       <bean id="initAndDestroyByImpl" class="com.tutorialspoint.InitAndDestroyByImpl">
+              <property name="message" value="Hello World!"/>
+       </bean>
+       -->
+       <!--
+       init-method 属性指定了一个方法，该方法在 bean 的[实例化阶段]会立即被调用
+       destroy-method 指定了一个方法，该方法只在一个 bean 从容器中[删除之前]被调用
+       -->
+       <!--
+       <bean id="initAndDestroyByXml" class="com.tutorialspoint.InitAndDestroyByXml" init-method="init" destroy-method="destroy">
+              <property name="message" value="Hello World!"/>
+       </bean>
+       -->
+       <!--=============== bean 生命周期 end  ==============-->
+
+
+       <!-- BeanPostProcessor (Bean 后置处理器)-->
+       <!--
+       <bean id="helloWorldPostProcessor" class="com.tutorialspoint.HelloWorldPostProcessor" init-method="init" destroy-method="destroy">
+              <property name="message" value="Hello World!"/>
+       </bean>
+       <bean class="com.tutorialspoint.InitHelloWorld"></bean>
+       -->
+
+
+       <!-- Bean 定义继承-->
+       <!--
+       <bean id="beanTemplate" class="com.tutorialspoint.BeanTemplate" abstract="true">
+              <property name="message1" value="Hello World!"/>
+              <property name="message2" value="Hello Second World!"/>
+       </bean>
+       <bean id="helloIndia" class="com.tutorialspoint.HelloIndia" parent="beanTemplate">
+              <property name="message1" value="Hello India!"/>
+              <property name="message3" value="Namaste India!"/>
+       </bean>
+       -->
+
+
+       <!--============== DI 依赖注入 基于构造函数 begin ============-->
+       <!--
+       <bean id="textEditor" class="com.tutorialspoint.TextEditor">
+            <constructor-arg name="spellChecker" ref="spellChecker" />
+       -->
+            <!--  type 属性显式的指定了构造函数参数的类型 -->
+            <!--<constructor-arg type="int" value="2016" />
+            <constructor-arg type="java.lang.String" value="hello!" />-->
+
+            <!--  使用 index 属性来显式的指定构造函数参数的索引 -->
+            <!--<constructor-arg index="0" value="2016" />
+            <constructor-arg index="1" value="hello!" />-->
+       <!--
+       </bean>
+       <bean id="spellChecker" class="com.tutorialspoint.SpellChecker"></bean>
+       -->
+       <!--=============== DI 依赖注入 基于构造函数 end =============-->
+
+
+       <!--============== DI 依赖注入 基于setter(设置函数) begin ============-->
+       <!--<bean id="textEditorSetter" class="com.tutorialspoint.TextEditorSetter">
+              <property name="spellChecker"  ref="spellChecker"/>
+       </bean>-->
+       <!-- 简洁的实现方式 -->
+       <!--<bean id="textEditorSetter" class="com.tutorialspoint.TextEditorSetter" p:spellChecker-ref="spellChecker"
+             p:name="hello"/>
+       <bean id="spellChecker" class="com.tutorialspoint.SpellChecker"></bean>-->
+       <!--=============== DI 依赖注入 基于setter end =============-->
+
+
+       <!--================ 注入内部 inner bean begin（内部类） ===================-->
+       <!--<bean id="textEditorSetter" class="com.tutorialspoint.TextEditorSetter">
+              <property name="spellChecker">
+                     <bean class="com.tutorialspoint.SpellChecker" />
+              </property>
+       </bean>-->
+       <!--================= 注入内部 inner bean end（内部类） ====================-->
+
+
+       <!--================ 注入集合 begin ===================-->
+       <!-- Definition for javaCollection -->
+       <!--<bean id="javaCollection" class="com.tutorialspoint.JavaCollection">
+
+              &lt;!&ndash; results in a setAddressList(java.util.List) call &ndash;&gt;
+              &lt;!&ndash;<property name="addressList">
+                     <list>
+                            <value>INDIA</value>
+                            <value>Pakistan</value>
+                            <value>USA</value>
+                            <value>USA</value>
+                     </list>
+              </property>&ndash;&gt;
+              <property name="addressList">
+                     <list>
+                            <ref bean="address1"/>
+                            <ref bean="address2"/>
+                            <value>USA</value>
+                     </list>
+              </property>
+
+              &lt;!&ndash; results in a setAddressSet(java.util.Set) call &ndash;&gt;
+              <property name="addressSet">
+                     <set>
+                            <value>INDIA</value>
+                            <value>Pakistan</value>
+                            <value>USA</value>
+                            <value>USA</value>
+                     </set>
+              </property>
+
+              &lt;!&ndash; results in a setAddressMap(java.util.Map) call &ndash;&gt;
+              <property name="addressMap">
+                     <map>
+                            <entry key="1" value="INDIA"/>
+                            <entry key="2" value="Pakistan"/>
+                            <entry key="3" value="USA"/>
+                            <entry key="4" value="USA"/>
+                     </map>
+              </property>
+
+              &lt;!&ndash; results in a setAddressProp(java.util.Properties) call &ndash;&gt;
+              <property name="addressProp">
+                     <props>
+                            <prop key="one">INDIA</prop>
+                            <prop key="two">Pakistan</prop>
+                            <prop key="three">USA</prop>
+                            <prop key="four">USA</prop>
+                     </props>
+              </property>
+
+       </bean>
+       <bean id="address1" class="com.tutorialspoint.Address">
+              <property name="provinceId" value="1"/>
+              <property name="city" value="杭州"/>
+              <property name="areaId"><null/></property>
+       </bean>
+       <bean id="address2" class="com.tutorialspoint.Address">
+              <property name="provinceId" value="1"/>
+              <property name="city" value=""/>
+              <property name="areaId" value="3"/>
+       </bean>-->
+       <!--================= 注入集合 end ====================-->
+
+
+       <!--============ 自动装配 byName begin ===========-->
+       <!--<bean id= "textEditorSetter" class="com.tutorialspoint.TextEditorSetter" autowire="byName">
+           <property name="name" value="hello"/>
+       </bean>
+       <bean id="spellChecker" class="com.tutorialspoint.SpellChecker"></bean>-->
+       <!--============ 自动装配 byName end =============-->
+
+
+       <!--============ 自动装配 byType begin ===========-->
+       <!--<bean id= "textEditorSetter" class="com.tutorialspoint.TextEditorSetter" autowire="byType">
+           <property name="name" value="hello"/>
+       </bean>
+       <bean id="spellChecker" class="com.tutorialspoint.SpellChecker"></bean>-->
+       <!--============ 自动装配 byType end =============-->
+
+       
+       <!--============ 自动装配 constructor begin ===========-->
+       <!--<bean id="textEditor" class="com.tutorialspoint.TextEditor" autowire="constructor">
+              <constructor-arg name="name" value="hello"/>
+       </bean>
+       <bean id="spellChecker" class="com.tutorialspoint.SpellChecker"/>-->
+       <!--============ 自动装配 constructor end =============-->
+
+
+       <!--============ @Required begin ===========-->
+       <!--<bean id="student" class="com.tutorialspoint.Student">
+              <property name="age" value="13"/>
+              <property name="name" value="anni"/>
+       </bean>-->
+       <!--============ @Required end =============-->
+
+
+       <!--============ @Autowired begin ===========-->
+       <!--<bean id="textEditorAutowired" class="com.tutorialspoint.TextEditorAutowired"></bean>
+       <bean id="spellChecker" class="com.tutorialspoint.SpellChecker"></bean>-->
+       <!--============ @Autowired end =============-->
+       
+       
+       <!--============ @Qualifier begin ===========-->
+       <!--<bean id="profile" class="com.tutorialspoint.Profile"/>
+       <bean id="student1" class="com.tutorialspoint.Student" p:age="10" p:name="Allen"/>
+       <bean id="student2" class="com.tutorialspoint.Student" p:age="13" p:name="Rukia"/>-->
+       <!--============ @Qualifier end =============-->
+
+
+       <!--============ @PostConstruct 和 @PreDestroy （init and destroy 替代品） begin ===========-->
+       <!--<bean id="helloWorldAtInitDestroy" class="com.tutorialspoint.HelloWorldAtInitDestroy"/>-->
+       <!--============ @PostConstruct 和 @PreDestroy （init and destroy 替代品） end =============-->
+
+
+       <!--============ @Resource begin ===========-->
+       <!--<bean id="textEditorResource" class="com.tutorialspoint.TextEditorResource"/>
+       <bean id="spell" class="com.tutorialspoint.SpellChecker"/>-->
+       <!--============ @Resource end =============-->
+
+       
+       <!--============ 事件event处理 begin ===========-->
+       <!--<bean id="cStartEventHandler" class="com.tutorialspoint.CStartEventHandler"/>
+       <bean id="cRefreshEventHandler" class="com.tutorialspoint.CRefreshEventHandler"/>
+       <bean id="cStopEventHandler" class="com.tutorialspoint.CStopEventHandler"/>
+       <bean id="cClosedEventHandler" class="com.tutorialspoint.CClosedEventHandler"/>
+       <bean id="helloWorld" class="com.tutorialspoint.HelloWorld" p:message="my name is allen"/>-->
+       <!--============ 事件event处理 end =============-->
+
+       <!--============ 自定义事件 begin ===========-->
+       <!--<bean id="customerEventPublisher" class="com.tutorialspoint.CustomerEventPublisher"/>
+       <bean id="customerEventHandler" class="com.tutorialspoint.CustomerEventHandler"/>-->
+       <!--============ 自定义事件 end =============-->
+</beans>
