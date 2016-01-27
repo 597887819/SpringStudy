@@ -2,6 +2,7 @@ package com.tutorialspoint;
 
 import com.tutorialspoint.aop.aspectJ.*;
 import com.tutorialspoint.aop.spring.*;
+import com.tutorialspoint.jdbc.*;
 
 /**
  * Created by wug on 2016/1/19 0019 9:54.
@@ -28,7 +29,8 @@ public class MainApp {
 //        CStartEventHandler.run();
 //        CustomerEventHandler.run();
 //        com.tutorialspoint.aop.spring.Student.run();
-        com.tutorialspoint.aop.aspectJ.Student.run();
+//        com.tutorialspoint.aop.aspectJ.Student.run();
+        com.tutorialspoint.jdbc.Student.run();
     }
 
 }
