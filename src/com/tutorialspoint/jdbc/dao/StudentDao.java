@@ -1,6 +1,7 @@
 package com.tutorialspoint.jdbc.dao;
 
 import com.tutorialspoint.jdbc.Student;
+import com.tutorialspoint.jdbc.StudentMarks;
 
 import javax.sql.DataSource;
 
@@ -48,4 +49,15 @@ public interface StudentDao {
      * a record into the Student table.
      */
     public void update(Integer id, Integer age);
+
+    /**
+     * 声明式事务管理
+     * @param name
+     * @param age
+     * @param marks
+     * @param year
+     */
+    void createTransactionAop(String name, Integer age, Integer marks, Integer year);
+
+    List<StudentMarks> listStudentsMarks();
 }

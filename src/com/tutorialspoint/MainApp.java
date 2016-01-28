@@ -30,7 +30,9 @@ public class MainApp {
 //        CustomerEventHandler.run();
 //        com.tutorialspoint.aop.spring.Student.run();
 //        com.tutorialspoint.aop.aspectJ.Student.run();
-        com.tutorialspoint.jdbc.Student.run();
+//        com.tutorialspoint.jdbc.Student.run();
+//        StudentMarks.run();
+        StudentMarks.run1();
     }
 
 }

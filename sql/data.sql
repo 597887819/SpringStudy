@@ -1,3 +1,4 @@
+-- Student表
 CREATE TABLE Student(
    ID   INT NOT NULL AUTO_INCREMENT,
    NAME VARCHAR(20) NOT NULL,
@@ -18,3 +19,10 @@ BEGIN
    FROM Student where id = in_id;
 END $$
 DELIMITER ;
+
+-- Marks表
+CREATE TABLE Marks(
+   SID INT NOT NULL,
+   MARKS  INT NOT NULL,
+   YEAR   INT NOT NULL
+);
