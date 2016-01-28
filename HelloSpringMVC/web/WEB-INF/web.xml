@@ -5,14 +5,48 @@
          version="3.1">
     <display-name>Spring MVC Application</display-name>
 
+    <!--
+    若不想使用默认配置
+    参考init-param的做法
+    并在src下新建目录resources作为目录文件
+    建立子目录spring 文件 servlet-config.xml
+
+    classpath 加载配置文件详解 http://blog.csdn.net/lhooouuu/article/details/6972180
+    -->
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/servlet-config.xml</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <!--
+    教程解释为：
+    如果你不想使用默认文件名 [servlet-name]-servlet.xml
+    和默认位置 WebContent/WEB-INF，你可以通过在 web.xml
+    文件中添加 servlet 监听器 ContextLoaderListener 自定义该文件的名称和位置，
+    如下所示：
+    ### 实际上该段内容是错误的
+    具体解释参考：http://sishuok.com/forum/blogPost/list/5188.html;jsessionid=EBC2151611BEB99BDF390C5CADBA693A
+
+    ContextLoaderListener 实际上是对整个spring的配置
+    Spring集成Web环境的通用配置；一般用于加载除Web层的Bean（如DAO、Service等），以便于与其他任何Web框架集成。
+
+    -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <!--<param-value>/WEB-INF/applicationContext.xml</param-value>-->
+        <param-value>classpath:spring/applicationContext.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
 </web-app>
