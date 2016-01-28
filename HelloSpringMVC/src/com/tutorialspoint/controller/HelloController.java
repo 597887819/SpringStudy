@@ -1,4 +1,4 @@
-package com.tutorialspoint;
+package com.tutorialspoint.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
