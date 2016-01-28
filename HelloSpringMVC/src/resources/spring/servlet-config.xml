@@ -28,4 +28,15 @@
        <mvc:annotation-driven/>
        <mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
 
+       <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+              <property name="exceptionMappings">
+                     <props>
+                            <prop key="com.tutorialspoint.exception.SpringException">
+                                   error/ExceptionPage
+                            </prop>
+                     </props>
+              </property>
+              <property name="defaultErrorView" value="error/error"/>
+       </bean>
+
 </beans>
