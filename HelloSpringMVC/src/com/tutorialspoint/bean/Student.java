@@ -5,6 +5,7 @@ package com.tutorialspoint.bean;
  * email wug@shinemo.com
  */
 public class Student {
+
     private Integer age;
     private String name;
     private Integer id;
@@ -32,4 +33,5 @@ public class Student {
     public Integer getId() {
         return id;
     }
+
 }
